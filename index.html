@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Quick Math Challenge</title>
+<link rel="stylesheet" href="style.css" />
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+</head>
+
+<body>
+  <!-- MODAL INPUT USERNAME -->
+  <div id="usernameModal" class="modal">
+      <div class="modal-box">
+          <h2>Siapa Nama Kamu?</h2>
+          <input id="usernameInput" type="text" maxlength="10" placeholder="Masukkan Nama" />
+          <button id="confirmUsername">Konfirmasi</button>
+      </div>
+  </div>
+
+  <!-- CONTAINER GAME -->
+  <div class="container hidden">
+
+    <!-- HOME -->
+    <div id="home">
+    <h1>Quick Math</h1>
+    <div class="subtitle">Latih otak berpikir cepat ⚡</div>
+
+    <!-- Tombol utama -->
+    <button id="play-btn" class="btn-main" onclick="goLevel()">▶ PLAY</button>
+    <button id="lb-btn" class="btn-main" onclick="toggleLB()">🏆 Leaderboard</button>
+    
+    <!-- Tombol Options ⚙️ -->
+    <button id="options-btn" class="btn-main" onclick="showOptions()">⚙️ Options</button>
+
+    <!-- Tombol opsi yang muncul setelah klik Options -->
+    <div id="options-buttons" class="hidden">
+        <button class="btn-main" onclick="contactOwner()">📨 Contacts</button>
+        <button class="btn-main" onclick="resetAccount()">🔄 Reset Account</button>
+        <button class="btn-main" onclick="hideOptions()">⬅ Kembali</button>
+    </div>
+
+        <div id="leaderboardBox" class="leaderboard hidden">
+            <div class="lb-tabs">
+                <button class="lb-btn lb-easy active" onclick="switchLB('easy',this)">EASY</button>
+                <button class="lb-btn lb-medium" onclick="switchLB('medium',this)">MEDIUM</button>
+                <button class="lb-btn lb-hard" onclick="switchLB('hard',this)">HARD</button>
+            </div>
+            <ol id="leaderboardList" class="lb-list"></ol>
+        </div>
+    </div>
+
+    <!-- LEVEL SELECT -->
+    <div id="levelSelect" class="hidden">
+        <h2>Select Mode</h2>
+        <div class="levels">
+            <div class="level easy" onclick="startGame('easy')">easy</div>
+            <div class="level medium" onclick="startGame('medium')">medium</div>
+            <div class="level hard" onclick="startGame('hard')">hard</div>
+        </div>
+        <button class="btn-main" onclick="backHome()">⬅ Kembali</button>
+    </div>
+
+    <!-- GAME -->
+    <div id="game" class="hidden">
+        <h2 id="levelTitle"></h2>
+        <div class="question" id="question"></div>
+        <input id="answer" type="number" placeholder="Jawaban" />
+        <button class="btn-submit" onclick="checkAnswer()">SUBMIT</button>
+
+        <div class="info">
+            <div>⏱ <span id="timeText"></span></div>
+            <div>⭐ <span id="scoreText"></span></div>
+        </div>
+
+        <div class="time-bar">
+            <div class="time-fill" id="timeFill"></div>
+        </div>
+    </div>
+
+    <!-- GAME OVER -->
+    <div id="gameOver" class="hidden">
+        <h2>💀 Game Over</h2>
+        <p>Skor kamu: <b id="finalScore"></b></p>
+        <button class="btn-main" onclick="restart()">Main Lagi</button>
+    </div>
+
+    <div class="footer">By Januari Fawwaz S.</div>
+  </div>
+
+  <script src="firebase.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
